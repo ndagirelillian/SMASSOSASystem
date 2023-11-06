@@ -16,37 +16,40 @@ def index(request):
 def view_student(request, id):
     student = Student.objects.get(pk=id)
     return HttpResponseRedirect(reverse('index'))
-
-   
 def add(request):
     if request.method == 'POST':
-        form = StudentForm(request.POST)
+        form = StudentForm(request.POST, request.FILES)  # Include 'request.FILES' to handle file uploads
         if form.is_valid():
+            # Extract the new fields from the form data
             new_student_number = form.cleaned_data['student_number']
             new_first_name = form.cleaned_data['first_name']
             new_last_name = form.cleaned_data['last_name']
             new_email = form.cleaned_data['email']
-            new_field_of_study = form.cleaned_data['field_of_study']
-            new_gpa = form.cleaned_data['gpa']
+            new_field_of_work = form.cleaned_data['field_of_work']
+            new_location = form.cleaned_data['location']
+            new_profile_picture = form.cleaned_data['profile_picture']
+            new_telephone_number = form.cleaned_data['telephone_number']
 
+            # Create and save the new student instance
             new_student = Student(
                 student_number=new_student_number,
                 first_name=new_first_name,
                 last_name=new_last_name,
                 email=new_email,
-                field_of_study=new_field_of_study,
-                gpa=new_gpa
+                field_of_work=new_field_of_work,
+                location=new_location,
+                profile_picture=new_profile_picture,
+                telephone_number=new_telephone_number
             )
-
             new_student.save()
+
             return render(request, 'students/add.html', {
                 'form': StudentForm(),
                 'success': True
             })
         else:
-            # Corrected the 'else' block
             return render(request, 'students/add.html', {
-                'form': form  # Assign the form to 'form' key in the dictionary
+                'form': form
             })
 
     # Handle the GET request
@@ -54,27 +57,8 @@ def add(request):
         return render(request, 'students/add.html', {
             'form': StudentForm()
         })
-
-
-   
     
-# def edit(request, id):
-#     student = get_object_or_404(Student, pk=id)  # Use get_object_or_404 to handle non-existing IDs
 
-#     if request.method == 'POST':
-#         form = StudentForm(request.POST, instance=student)
-#         if form.is_valid():
-#             form.save()
-#             return render(request, 'students/edit.html', {
-#                 'form': form,
-#                 'success': True
-#             })
-#     else:
-#         form = StudentForm(instance=student)
-
-#     return render(request, 'students/edit.html', {
-#         'form': form
-#     })
 
 def edit(request, id):
     student = get_object_or_404(Student, pk=id)

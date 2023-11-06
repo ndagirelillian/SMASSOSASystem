@@ -33,8 +33,8 @@
                     <td>{{ student.first_name }}</td>
                     <td>{{ student.last_name }}</td>
                     <td>{{ student.email }}</td>
-                    <td>{{ student.field_of_study }}</td>
-                    <td>{{ student.gpa }}</td>
+                    <td>{{ student.field_of_work }}</td>
+                    <td>{{ student.location }}</td>
                     <td>
                       <button type="button" class="btn btn-success me-1" href=" {% url  'view_student' student.id %}" 
                       data-bs-toggle="modal" data-bs-target="#myModal{{student.id}}">
@@ -42,45 +42,50 @@
                       
 
 
-
-
-                    <!-- Modal -View Student -->
-                    <div class="modal" id="myModal{{student.id}}" tabindex="=-1" aria-labelledby="myModalLabel1" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title">
-                              Student:{{student.first_name}} {{student.last_name}}
-                            </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true"></span>
-                            </button>
+                  <!-- Modal - View Student -->
+                  <div class="modal" id="myModal{{student.id}}" tabindex="-1" aria-labelledby="myModalLabel1" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">
+                            Student: {{student.first_name}} {{student.last_name}}
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"></span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <img src="{{student.profile_picture_url}}" alt="Profile Picture" class="img-fluid">
+                            </div>
+                            <div class="col-md-6">
+                              <ul class="list-unstyled">
+                                <li>Person Number: <strong>{{student.student_number}}</strong></li>
+                                <li>First Name: <strong>{{student.first_name}}</strong></li>
+                                <li>Last Name: <strong>{{student.last_name}}</strong></li>
+                                <li>Email: <strong>{{student.email}}</strong></li>
+                                <li>Field of Work: <strong>{{student.field_of_work}}</strong></li>
+                                <li>Location: <strong>{{student.location}}</strong></li>
+                                <li>Telephone Number: <strong>{{student.telephone_number}}</strong></li>
+                              </ul>
+                            </div>
                           </div>
-                          <div class="modal-body">
-                            <ul class="list-unstyled">
-                              <li>Person Number: <strong>{{student.student_number}}</strong></li>
-                              <li>First Name: <strong>{{student.first_name}}</strong></li>
-                              <li>Last Name: <strong>{{student.last_name}}</strong></li>
-                              <li>Email: <strong>{{student.email}}</strong></li>
-                              <li>Field of Work: <strong>{{student.field_of_study}}</strong></li>
-                              <li>Location: <strong>{{student.gpa}}</strong></li>
-                            </ul>
-                            
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                       </div>
                     </div>
-                    <a class="btn btn-warning me-1" href="{% url 'edit' student.id %}">
-                      <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                    </a>
-
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{student.id}}">
-                      <i class="fa-solid fa-trash-can fa-lg"></i>
+                  </div>
+                  <a class="btn btn-warning me-1" href="{% url 'edit' student.id %}">
+                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                  </a>
+                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{student.id}}">
+                    <i class="fa-solid fa-trash-can fa-lg"></i>
                   </button>
+
                   
                   <!-- Modal Delete Student -->
                   <div class="modal" id="deleteModal{{student.id}}" tabindex="-1" aria-labelledby="deleteModalLabel{{student.id}}" aria-hidden="true">

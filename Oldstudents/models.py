@@ -6,8 +6,10 @@ class Student(models.Model):
     first_name = models.CharField(max_length = 50)
     last_name = models.CharField(max_length = 50)
     email = models.CharField(max_length=100)
-    field_of_study = models.CharField(max_length=50)
-    gpa = models.CharField(max_length=50)
+    field_of_work = models.CharField(max_length=50)
+    location = models.CharField(max_length=50)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
+    telephone_number = models.CharField(max_length=15, null=True, blank=True)
 
 
     def __str__(self):
