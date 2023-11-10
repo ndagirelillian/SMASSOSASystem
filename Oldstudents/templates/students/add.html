@@ -12,18 +12,15 @@
                 <div class="card bg-light mb-3">
                     <div class="card-header"><i class="fa-solid fa-address-card fa-lg"> Old Student Registration</i></div>
                     <div class="card-body">
-                      <form action="{% url 'add' %}" method="POST">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit" class="btn btn-primary">Add</button>
-                        <a href="{% url 'index' %}" class="btn btn-secondary">Cancel</a>
-                      </form>
+                        <form action="{% url 'add' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary">Add</button>
+                            <a href="{% url 'index' %}" class="btn btn-secondary">Cancel</a>
+                        </form>
                     </div>
-                  </div>
+                </div>
             </div>
-
         </div>
-   
-     
     {% endif %}
 {% endblock %}
