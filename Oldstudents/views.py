@@ -16,11 +16,14 @@ def index(request):
 def view_student(request, id):
     student = Student.objects.get(pk=id)
     return HttpResponseRedirect(reverse('index'))
+
+
+
+
 def add(request):
     if request.method == 'POST':
-        form = StudentForm(request.POST, request.FILES)  # Include 'request.FILES' to handle file uploads
+        form = StudentForm(request.POST, request.FILES)
         if form.is_valid():
-            # Extract the new fields from the form data
             new_student_number = form.cleaned_data['student_number']
             new_first_name = form.cleaned_data['first_name']
             new_last_name = form.cleaned_data['last_name']
@@ -29,6 +32,10 @@ def add(request):
             new_location = form.cleaned_data['location']
             new_profile_picture = form.cleaned_data['profile_picture']
             new_telephone_number = form.cleaned_data['telephone_number']
+
+            # Extract the new fields for Year of Entry and Year of Completion
+            new_year_of_entry = form.cleaned_data['year_of_entry']
+            new_year_of_completion = form.cleaned_data['year_of_completion']
 
             # Create and save the new student instance
             new_student = Student(
@@ -39,7 +46,9 @@ def add(request):
                 field_of_work=new_field_of_work,
                 location=new_location,
                 profile_picture=new_profile_picture,
-                telephone_number=new_telephone_number
+                telephone_number=new_telephone_number,
+                year_of_entry=new_year_of_entry,
+                year_of_completion=new_year_of_completion,
             )
             new_student.save()
 
@@ -51,12 +60,12 @@ def add(request):
             return render(request, 'students/add.html', {
                 'form': form
             })
-
-    # Handle the GET request
     else:
         return render(request, 'students/add.html', {
             'form': StudentForm()
         })
+
+
     
 
 

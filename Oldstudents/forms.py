@@ -4,7 +4,8 @@ from .models import Student
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['student_number', 'first_name', 'last_name', 'email', 'field_of_work', 'location', 'profile_picture', 'telephone_number']
+        fields = ['student_number', 'first_name', 'last_name', 'email', 
+                  'field_of_work', 'location', 'profile_picture', 'telephone_number', 'year_of_entry', 'year_of_completion']
         labels = {
             'student_number': 'Person Number',
             'first_name': 'First Name',
@@ -13,7 +14,9 @@ class StudentForm(forms.ModelForm):
             'field_of_work': 'Field of Work',
             'location': 'Location',
             'profile_picture': 'Profile Picture',
-            'telephone_number': 'Telephone Number'
+            'telephone_number': 'Telephone Number',
+            'year_of_entry': 'Year of Entry',
+            'year_of_completion': 'Year of Completion',
         }
 
         widgets = {
@@ -24,5 +27,7 @@ class StudentForm(forms.ModelForm):
             'field_of_work': forms.TextInput(attrs={'class': 'form-control'}),
             'location': forms.TextInput(attrs={'class': 'form-control'}),
             'profile_picture': forms.ClearableFileInput(attrs={'class': 'form-control'}),
-            'telephone_number': forms.TextInput(attrs={'class': 'form-control'})
+            'telephone_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'year_of_entry': forms.Select(attrs={'class': 'form-control'}),
+            'year_of_completion': forms.Select(attrs={'class': 'form-control'}),
         }

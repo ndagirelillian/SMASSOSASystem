@@ -13,6 +13,10 @@ class Student(models.Model):
     location = models.CharField(max_length=50)
     profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
     telephone_number = models.CharField(max_length=15, null=True, blank=True)
+    YEAR_CHOICES = [(year, year) for year in range(2000, 2030)]  # Adjust the range as needed
+
+    year_of_entry = models.IntegerField(choices=YEAR_CHOICES)
+    year_of_completion = models.IntegerField(choices=YEAR_CHOICES)
 
 
     def __str__(self):
