@@ -1,0 +1,14 @@
+<!-- all_students.html -->
+{% extends 'students/base.html' %}
+{% block content %}
+    <h2>All Students</h2>
+    <ul>
+        {% for student in students %}
+            <!-- Example link in some template -->
+            <a href="{% url 'all_students' %}">View All OldStudents</a>
+            <a href="{% url 'students_by_field' 'Business' %}">View People in Business Students</a>
+            <a href="{% url 'students_by_year' 2022 %}">View People who Finished in 2022</a>
+
+        {% endfor %}
+    </ul>
+{% endblock %}

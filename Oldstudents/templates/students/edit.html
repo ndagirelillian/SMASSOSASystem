@@ -15,7 +15,9 @@
                     </div>
                     <div class="card-body">
                         
-                        <form action="{% url 'edit' id=student.id %}" method="POST" enctype="multipart/form-data"></form>
+                        <!-- <form action="{% url 'edit' id=student.id %}" method="POST" enctype="multipart/form-data"></form> -->
+                        <form method="post" action="{% url 'edit' id=student.id %}">
+
 
                 
                         {% csrf_token %}

@@ -17,7 +17,8 @@ def view_student(request, id):
     student = Student.objects.get(pk=id)
     return HttpResponseRedirect(reverse('index'))
 
-
+def reports(request):
+    return render (request,'students/reports.html')
 
 
 def add(request):
@@ -67,27 +68,53 @@ def add(request):
 
 
     
-
-
 def edit(request, id):
+    # Retrieve the student instance or return a 404 response if not found
     student = get_object_or_404(Student, pk=id)
 
     if request.method == 'POST':
+        # If the request method is POST, process the form data
         form = StudentForm(request.POST, instance=student)
+        
         if form.is_valid():
+            # Save the changes if the form is valid
             form.save()
             return render(request, 'students/edit.html', {
                 'form': form,
                 'success': True,
-                'student': student  # Pass the student object to the template
+                'student': student,
             })
+        else:
+            # If the form is not valid, print errors for debugging
+            print(form.errors)
     else:
+        # If the request method is not POST, display the form
         form = StudentForm(instance=student)
 
     return render(request, 'students/edit.html', {
         'form': form,
-        'student': student  # Pass the student object to the template
+        'student': student,
     })
+
+# def edit(request, id):
+#     student = get_object_or_404(Student, pk=id)
+
+#     if request.method == 'POST':
+#         form = StudentForm(request.POST, instance=student)
+#         if form.is_valid():
+#             form.save()
+#             return render(request, 'students/edit.html', {
+#                 'form': form,
+#                 'success': True,
+#                 'student': student  # Pass the student object to the template
+#             })
+#     else:
+#         form = StudentForm(instance=student)
+
+#     return render(request, 'students/edit.html', {
+#         'form': form,
+#         'student': student  # Pass the student object to the template
+#     })
 
 def delete(request, id):
     try:
@@ -102,3 +129,17 @@ def delete(request, id):
         student.delete()
         return HttpResponseRedirect(reverse('index'))
     return render(request, 'students/delete.html', {'student': student})
+
+
+
+def all_students(request):
+    students = Student.objects.all()
+    return render(request, 'all_students.html', {'students': students})
+
+def students_by_field(request, field_name):
+    students = Student.objects.filter(field_of_work=field_name)
+    return render(request, 'students_by_field.html', {'students': students, 'field_name': field_name})
+
+def students_by_year(request, year):
+    students = Student.objects.filter(year_of_completion=year)
+    return render(request, 'students_by_year.html', {'students': students,})

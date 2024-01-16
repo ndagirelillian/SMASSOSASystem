@@ -1,0 +1,10 @@
+<!-- students_by_field.html -->
+{% extends 'students/base.html' %}
+{% block content %}
+    <h2>Students in {{ field_name }}</h2>
+    <ul>
+        {% for student in students %}
+            <li>{{ student.first_name }} {{ student.last_name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
